@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="secondary">
     <ion-title>Welcome</ion-title>
   </ion-navbar>
 
@@ -8,6 +8,12 @@
 
 <ion-content>
   <br>
-  <button ion-button full color="secondary" outline>Manage Students</button>
-  <button ion-button full color="secondary" outline>Manage Companies</button>
+  <button ion-button full color="secondary" outline (click)="manageStudents()">
+    <ion-icon name="people" padding-right="5px"></ion-icon>
+    Manage Students
+  </button>
+  <button ion-button full color="secondary" outline (click)="manageCompanies()">
+    <ion-icon name="trending-up" padding-right="5px"></ion-icon>
+    Manage Companies
+  </button>
 </ion-content>

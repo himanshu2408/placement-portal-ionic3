@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { UserListPage } from '../user-list/user-list';
+import { CompanyListPage } from '../company-list/company-list';
 
-/**
- * Generated class for the MainPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+
 @IonicPage()
 @Component({
   selector: 'page-main',
@@ -21,4 +18,11 @@ export class MainPage {
     console.log('ionViewDidLoad MainPage');
   }
 
+  manageStudents(){
+    this.navCtrl.push(UserListPage);
+  }
+
+  manageCompanies(){
+    this.navCtrl.push(CompanyListPage);
+  }
 }

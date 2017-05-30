@@ -3,9 +3,11 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import {UsersService} from './services/users.service';
 import { MainPage } from '../pages/main/main';
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [UsersService]
 })
 export class MyApp {
   rootPage:any = MainPage;

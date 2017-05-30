@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {CompaniesService} from '../../app/services/companies.service';
 
-/**
- * Generated class for the CompanyListPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-company-list',
@@ -14,11 +9,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class CompanyListPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  companies: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private companiesService: CompaniesService) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CompanyListPage');
+    this.companiesService.getCompanies().then(response => this.companies = response);
   }
 
 }

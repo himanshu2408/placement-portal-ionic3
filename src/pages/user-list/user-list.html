@@ -7,12 +7,16 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>UserList</ion-title>
+    <ion-title>Users</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-list>
+    <button ion-item *ngFor="let user of users" (click)="userSelected(user)">
+      Roll No:  {{ user.rollno }}
+    </button>
+  </ion-list>
 </ion-content>
