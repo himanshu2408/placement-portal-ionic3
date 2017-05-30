@@ -18,20 +18,23 @@
     <ion-list>
       <ion-item>
         <ion-label fixed>Name</ion-label>
-        <ion-input type="text" value="{{user.name}}"></ion-input>
+        <ion-input type="text" value="{{user.name}}" [(ngModel)]="user.name"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label fixed>Branch: </ion-label>
-        <ion-input type="text" value="{{user.department}}"></ion-input>
+        <ion-input type="text" value="{{user.department}}" [(ngModel)]="user.department"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label fixed>Roll No:</ion-label>
-        <ion-input type="text" value="{{user.rollno}}"></ion-input>
+        <ion-input type="text" value="{{user.rollno}}" [(ngModel)]="user.rollno"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label fixed>CGPA:</ion-label>
-        <ion-input type="text" value="{{user.cgpa}}"></ion-input>
+        <ion-input type="text" value="{{user.cgpa}}" [(ngModel)]="user.cgpa"></ion-input>
       </ion-item>
     </ion-list>
   </ion-card>
+  <button ion-button full color="secondary" outline (click)="save()">
+    Save Details
+  </button>
 </ion-content>

@@ -1,20 +1,16 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
-import 'rxjs/add/operator/toPromise';
+import { Observable }     from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class CompaniesService{
 
   private baseUrl = 'http://192.168.1.3:3000/api/companies';
   constructor(private http: Http) { }
-  getCompanies(): Promise<any> {
-    return this.http.get(this.baseUrl)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error);
-    return Promise.reject(error.message || error);
+  getCompanies(): Observable<any> {
+    return this.http
+      .get(this.baseUrl)
+      .map(response => response.json());
   }
 }

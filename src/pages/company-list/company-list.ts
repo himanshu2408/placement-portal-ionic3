@@ -14,8 +14,8 @@ export class CompanyListPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CompanyListPage');
-    this.companiesService.getCompanies().then(response => this.companies = response);
+    console.log('ionViewDidLoad CompanyList Page');
+    this.companiesService.getCompanies().subscribe(response => this.companies = response);
   }
 
 }

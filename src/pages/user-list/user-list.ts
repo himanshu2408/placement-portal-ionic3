@@ -17,7 +17,7 @@ export class UserListPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserListPage');
-    this.usersService.getUsers().then(response => this.users = response);
+    this.usersService.getUsers().subscribe(response => this.users = response);
   }
 
   userSelected(user){
