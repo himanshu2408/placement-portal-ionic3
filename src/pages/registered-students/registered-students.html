@@ -1,0 +1,47 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="registerStudent()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Registered Students</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-card *ngFor="let student of registeredStudents">
+
+        <ion-list>
+          <ion-item>
+          <h3>
+            Name:
+          </h3>
+          <p item-right>{{student.name}}</p>
+          </ion-item>
+          <ion-item>
+            <h3>
+              Department:
+            </h3>
+            <p item-right>{{student.department}}</p>
+          </ion-item>
+          <ion-item>
+            <h3>
+              Roll No:
+            </h3>
+            <p item-right>{{student.rollno}}</p>
+          </ion-item>
+          <ion-item>
+            <h3>
+              CGPA:
+            </h3>
+            <p item-right>{{student.cgpa}}</p>
+          </ion-item>
+        </ion-list>
+
+    </ion-card>
+
+</ion-content>

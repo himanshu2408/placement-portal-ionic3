@@ -17,7 +17,7 @@
 <ion-content padding>
   <ion-list>
     <ion-item-sliding *ngFor="let user of users">
-      <ion-item (click)="userSelected(user)">
+      <ion-item (click)="editUser(user)">
         Roll No:  {{ user.rollno }}
       </ion-item>
       <ion-item-options side="left">

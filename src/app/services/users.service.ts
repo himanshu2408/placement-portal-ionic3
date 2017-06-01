@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class UsersService{
 
-  private baseUrl = 'http://192.168.1.5:3000/api/students';
+  private baseUrl = 'http://192.168.1.3:3000/api/students';
   private headers = new Headers({'Content-Type': 'application/json'});
   private updateUrl : any;
   constructor(private http: Http) { }

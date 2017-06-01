@@ -39,7 +39,7 @@ export class UserListPage {
     this.loading.dismiss();
   }
 
-  userSelected(user){
+  editUser(user){
     this.navCtrl.push(EditUserPage, {
       user: user
     });

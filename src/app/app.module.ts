@@ -7,11 +7,16 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { MainPage } from '../pages/main/main';
+
 import { UserListPage } from '../pages/user-list/user-list';
 import { EditUserPage } from '../pages/edit-user/edit-user';
+import { AddUserPage } from '../pages/add-user/add-user';
+
 import { CompanyListPage } from '../pages/company-list/company-list';
 import { EditCompanyPage } from '../pages/edit-company/edit-company';
-import { AddUserPage } from '../pages/add-user/add-user';
+import { AddCompanyPage } from '../pages/add-company/add-company';
+import { RegisteredStudentsPage } from '../pages/registered-students/registered-students';
+
 import { UsersService } from './services/users.service';
 import { CompaniesService } from './services/companies.service';
 
@@ -20,10 +25,12 @@ import { CompaniesService } from './services/companies.service';
     MyApp,
     MainPage,
     UserListPage,
-    CompanyListPage,
     EditUserPage,
+    AddUserPage,
+    CompanyListPage,
     EditCompanyPage,
-    AddUserPage
+    AddCompanyPage,
+    RegisteredStudentsPage
   ],
   imports: [
     BrowserModule,
@@ -38,7 +45,9 @@ import { CompaniesService } from './services/companies.service';
     CompanyListPage,
     EditUserPage,
     EditCompanyPage,
-    AddUserPage
+    AddUserPage,
+    AddCompanyPage,
+    RegisteredStudentsPage
   ],
   providers: [
     StatusBar,

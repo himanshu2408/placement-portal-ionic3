@@ -9,7 +9,9 @@ import { AlertController } from 'ionic-angular';
   templateUrl: 'edit-user.html',
 })
 export class EditUserPage {
-  user: any;
+
+  private user: any;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
