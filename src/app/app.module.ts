@@ -11,6 +11,7 @@ import { UserListPage } from '../pages/user-list/user-list';
 import { EditUserPage } from '../pages/edit-user/edit-user';
 import { CompanyListPage } from '../pages/company-list/company-list';
 import { EditCompanyPage } from '../pages/edit-company/edit-company';
+import { AddUserPage } from '../pages/add-user/add-user';
 import { UsersService } from './services/users.service';
 import { CompaniesService } from './services/companies.service';
 
@@ -21,7 +22,8 @@ import { CompaniesService } from './services/companies.service';
     UserListPage,
     CompanyListPage,
     EditUserPage,
-    EditCompanyPage
+    EditCompanyPage,
+    AddUserPage
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,8 @@ import { CompaniesService } from './services/companies.service';
     UserListPage,
     CompanyListPage,
     EditUserPage,
-    EditCompanyPage
+    EditCompanyPage,
+    AddUserPage
   ],
   providers: [
     StatusBar,
