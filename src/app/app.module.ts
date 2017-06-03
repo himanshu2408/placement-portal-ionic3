@@ -7,6 +7,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { MainPage } from '../pages/main/main';
+import { LoginPage } from '../pages/login/login';
+import { SignupPage } from '../pages/signup/signup';
 
 import { UserListPage } from '../pages/user-list/user-list';
 import { EditUserPage } from '../pages/edit-user/edit-user';
@@ -16,21 +18,27 @@ import { CompanyListPage } from '../pages/company-list/company-list';
 import { EditCompanyPage } from '../pages/edit-company/edit-company';
 import { AddCompanyPage } from '../pages/add-company/add-company';
 import { RegisteredStudentsPage } from '../pages/registered-students/registered-students';
+import { RegisterStudentForCompanyPage } from '../pages/register-student-for-company/register-student-for-company';
 
 import { UsersService } from './services/users.service';
+import { StaticService } from './services/static.service';
 import { CompaniesService } from './services/companies.service';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
     MyApp,
     MainPage,
+    LoginPage,
+    SignupPage,
     UserListPage,
     EditUserPage,
     AddUserPage,
     CompanyListPage,
     EditCompanyPage,
     AddCompanyPage,
-    RegisteredStudentsPage
+    RegisteredStudentsPage,
+    RegisterStudentForCompanyPage
   ],
   imports: [
     BrowserModule,
@@ -41,19 +49,24 @@ import { CompaniesService } from './services/companies.service';
   entryComponents: [
     MyApp,
     MainPage,
+    LoginPage,
+    SignupPage,
     UserListPage,
     CompanyListPage,
     EditUserPage,
     EditCompanyPage,
     AddUserPage,
     AddCompanyPage,
-    RegisteredStudentsPage
+    RegisteredStudentsPage,
+    RegisterStudentForCompanyPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     UsersService,
     CompaniesService,
+    StaticService,
+    AuthService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

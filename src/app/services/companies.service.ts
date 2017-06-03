@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http} from '@angular/http';
+import { StaticService } from './static.service';
 import { Observable }     from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class CompaniesService{
 
-  private baseUrl = 'http://192.168.1.3:3000/api/companies';
+  private Url = this.staticService.getUrl();
+  private baseUrl = this.Url+ 'companies';
   private headers = new Headers({'Content-Type': 'application/json'});
   private updateUrl : any;
 
-  constructor(private http: Http) { }
+  constructor(
+    private http: Http,
+    private staticService: StaticService
+  ) { }
 
   getCompanies(): Observable<any> {
     return this.http
@@ -38,4 +43,10 @@ export class CompaniesService{
       .map(response => response);
   }
 
+  registerStudent(company, newSudent): Observable<any> {
+    this.updateUrl = this.baseUrl+"/"+company._id;
+    return this.http
+      .post(this.updateUrl, newSudent ,{headers: this.headers})
+      .map(response => response);
+  }
 }

@@ -6,19 +6,20 @@ import { LoadingController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-add-company',
-  templateUrl: 'add-company.html',
+  selector: 'page-register-student-for-company',
+  templateUrl: 'register-student-for-company.html',
 })
-export class AddCompanyPage {
+export class RegisterStudentForCompanyPage {
 
-  private newCompany = {
-    name : '',
-    profile: '',
-    ctc: '',
-    address: ''
+  private company: any;
+  private newStudent = {
+    name: '',
+    department: '',
+    rollno: '',
+    cgpa: ''
   };
-
   private loading: any;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -26,21 +27,24 @@ export class AddCompanyPage {
     private alertCtrl: AlertController,
     private loadingCtrl: LoadingController
   ) {
+    this.company = navParams.get('company');
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AddCompanyPage');
+    console.log('ionViewDidLoad RegisterStudentForCompanyPage');
   }
 
-  saveCompany(){
+  saveStudent(){
     this.presentLoadingDefault();
-    this.companiesService.addCompany(this.newCompany).subscribe(response => {
+    this.companiesService.registerStudent(this.company, this.newStudent).subscribe(response => {
       console.log(response);
       this.loading.dismiss();
       this.navCtrl.pop();
       this.navCtrl.pop();
-      this.presentAlert('Nice Job!', 'New Company has been added successfully.');
-    });
+      this.navCtrl.pop();
+      this.navCtrl.pop();
+      this.presentAlert('Nice Job!', 'New Student has been added successfully.');
+    })
   }
 
   presentAlert(title, subTitle) {

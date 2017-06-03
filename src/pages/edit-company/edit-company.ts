@@ -43,10 +43,10 @@ export class EditCompanyPage {
     alert.present();
   }
 
-  showRegisteredStudents(registeredStudents){
-    console.log(registeredStudents);
+  showRegisteredStudents(company){
+    console.log(company);
     this.navCtrl.push(RegisteredStudentsPage, {
-      registeredStudents: registeredStudents
+      company: company
     });
   }
 }

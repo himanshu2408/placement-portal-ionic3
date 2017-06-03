@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { RegisterStudentForCompanyPage } from '../register-student-for-company/register-student-for-company'
 
 @IonicPage()
 @Component({
@@ -9,18 +9,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class RegisteredStudentsPage {
 
-  private registeredStudents: any;
+  private company: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams) {
-    this.registeredStudents = navParams.get('registeredStudents');
+    this.company = navParams.get('company');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisteredStudentsPage');
   }
 
-  registerStudent(){
-
+  registerStudent(company){
+    this.navCtrl.push(RegisterStudentForCompanyPage, {
+      company: company
+    })
   }
 }

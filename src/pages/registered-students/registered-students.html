@@ -2,7 +2,7 @@
 
   <ion-navbar>
     <ion-buttons end>
-      <button ion-button icon-only (click)="registerStudent()">
+      <button ion-button icon-only (click)="registerStudent(company)">
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>
@@ -13,7 +13,7 @@
 
 
 <ion-content>
-    <ion-card *ngFor="let student of registeredStudents">
+    <ion-card *ngFor="let student of company.registeredStudents">
 
         <ion-list>
           <ion-item>

@@ -16,7 +16,8 @@ export class AddUserPage {
     department: '',
     rollno: '',
     cgpa: ''
-  }
+  };
+
   private loading: any;
   constructor(
     public navCtrl: NavController,

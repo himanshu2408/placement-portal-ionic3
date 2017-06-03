@@ -1,16 +1,20 @@
-import {Injectable} from '@angular/core';
-import {Headers, Http} from '@angular/http';
-
+import { Injectable } from '@angular/core';
+import { Headers, Http } from '@angular/http';
+import { StaticService } from './static.service';
 import { Observable }     from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class UsersService{
 
-  private baseUrl = 'http://192.168.1.3:3000/api/students';
+  private Url = this.staticService.getUrl();
+  private baseUrl = this.Url+ 'students';
   private headers = new Headers({'Content-Type': 'application/json'});
   private updateUrl : any;
-  constructor(private http: Http) { }
+  constructor(
+    private http: Http,
+    private staticService: StaticService
+  ) { }
   getUsers(): Observable<any> {
     return this.http
       .get(this.baseUrl)

@@ -1,0 +1,37 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Register Student For Company</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Name</ion-label>
+      <ion-input type="text" [(ngModel)]="newStudent.name" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Department</ion-label>
+      <ion-input type="text" [(ngModel)]="newStudent.department" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Roll No</ion-label>
+      <ion-input type="number" [(ngModel)]="newStudent.rollno" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>CGPA</ion-label>
+      <ion-input type="number" [(ngModel)]="newStudent.cgpa" required></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button full color="secondary" outline (click)="saveStudent()">
+    Save
+  </button>
+</ion-content>
