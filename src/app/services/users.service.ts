@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 export class UsersService{
 
   private Url = this.staticService.getUrl();
-  private baseUrl = this.Url+ 'students';
+  private baseUrl = this.Url+ 'api/students';
   private headers = new Headers({'Content-Type': 'application/json'});
   private updateUrl : any;
   constructor(

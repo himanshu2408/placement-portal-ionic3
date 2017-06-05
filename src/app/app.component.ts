@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Events } from 'ionic-angular';
 
-import { AuthService} from './services/auth.service';
+//import { AuthService} from './services/auth.service';
 import { MainPage } from '../pages/main/main';
 import { LoginPage } from '../pages/login/login';
 
@@ -13,14 +14,17 @@ import { LoginPage } from '../pages/login/login';
 })
 export class MyApp {
 
-  rootPage:any = MainPage;
-
+  rootPage:any = LoginPage;
   constructor(
     platform: Platform,
     statusBar: StatusBar,
     splashScreen: SplashScreen,
-    private authService: AuthService
+    public events: Events
   ) {
+
+    this.events.subscribe('user:login', () => {
+      this.loggedIn();
+    });
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -29,7 +33,11 @@ export class MyApp {
       splashScreen.hide();
     });
 
-    //this.authService.login();
+
+  }
+  loggedIn(){
+    this.rootPage = MainPage;
+    console.log("logged in");
   }
 }
 
