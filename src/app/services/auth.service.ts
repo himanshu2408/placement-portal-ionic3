@@ -7,8 +7,8 @@ import { StaticService } from './static.service';
 export class AuthService{
 
   private loginUrl = this.staticService.getUrl()+'api/login';
+  private logoutUrl = this.staticService.getUrl()+'api/logout';
   private headers = new Headers({'Content-Type': 'application/json'});
-  private isAuthenticated = false;
 
   constructor(
     private http: Http,
@@ -22,12 +22,10 @@ export class AuthService{
       .map(response => response);
   }
 
-  loggedIn(){
-    this.isAuthenticated = true;
-  }
-
-  isLoggedIn(){
-    return this.isAuthenticated;
+  logout(): Observable<any>{
+    return this.http
+      .get(this.logoutUrl, {headers: this.headers})
+      .map(response =>response);
   }
 
   signup(){

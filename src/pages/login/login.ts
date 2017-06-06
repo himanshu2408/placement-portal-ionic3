@@ -4,6 +4,7 @@ import { AuthService} from '../../app/services/auth.service';
 import { Events } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -24,7 +25,8 @@ export class LoginPage {
     private authService: AuthService,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
-    public events: Events
+    public events: Events,
+    private storage: Storage
   ) {
   }
 
@@ -44,9 +46,10 @@ export class LoginPage {
     this.presentLoadingDefault();
     this.authService.login(this.user).subscribe(response => {
         this.loading.dismiss();
-        console.log(response);
+        //console.log(response);
         if(response.status === 200){
           console.log(response.status);
+          this.storage.set('isAuthenticated', 'true');
           this.events.publish('user:login');
         }
         else {

@@ -3,8 +3,8 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Events } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
-//import { AuthService} from './services/auth.service';
 import { MainPage } from '../pages/main/main';
 import { LoginPage } from '../pages/login/login';
 
@@ -14,16 +14,33 @@ import { LoginPage } from '../pages/login/login';
 })
 export class MyApp {
 
-  rootPage:any = LoginPage;
+  rootPage:any;
+
   constructor(
     platform: Platform,
     statusBar: StatusBar,
     splashScreen: SplashScreen,
-    public events: Events
+    public events: Events,
+    private storage: Storage
   ) {
+
+    this.storage.get('isAuthenticated').then((val) => {
+      console.log('value of isAuthenticated is: ', val);
+      if(val){
+        this.rootPage = MainPage;
+      }
+      else{
+        this.rootPage = LoginPage;
+      }
+    });
+
 
     this.events.subscribe('user:login', () => {
       this.loggedIn();
+    });
+
+    this.events.subscribe('user:logout', () => {
+      this.loggedOut();
     });
 
     platform.ready().then(() => {
@@ -35,9 +52,15 @@ export class MyApp {
 
 
   }
+
   loggedIn(){
     this.rootPage = MainPage;
-    console.log("logged in");
+    console.log("successfully logged in");
+  }
+
+  loggedOut(){
+    this.rootPage = LoginPage;
+    console.log("successfully logged out");
   }
 }
 
