@@ -55,7 +55,8 @@ export class CompanyListPage {
     this.companiesService.deleteCompany(company).subscribe(response => {
       console.log(response);
       this.loading.dismiss();
-      this.presentAlert('Nice Job!', 'User has been successfully deleted.');
+      this.presentAlert('Nice Job!', 'Company has been successfully deleted.');
+      this.navCtrl.popToRoot();
     });
   }
 

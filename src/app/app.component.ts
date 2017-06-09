@@ -26,7 +26,7 @@ export class MyApp {
 
     this.storage.get('isAuthenticated').then((val) => {
       console.log('value of isAuthenticated is: ', val);
-      if(val){
+      if(val === 'true'){
         this.rootPage = MainPage;
       }
       else{

@@ -37,9 +37,8 @@ export class AddCompanyPage {
     this.companiesService.addCompany(this.newCompany).subscribe(response => {
       console.log(response);
       this.loading.dismiss();
-      this.navCtrl.pop();
-      this.navCtrl.pop();
-      this.presentAlert('Nice Job!', 'New Company has been added successfully.');
+      this.navCtrl.pop
+      this.presentAlert('Nice ob!', 'New Company has been added successfully.');
     });
   }
 

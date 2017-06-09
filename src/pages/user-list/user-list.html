@@ -19,6 +19,7 @@
     <ion-item-sliding *ngFor="let user of users">
       <ion-item (click)="editUser(user)">
         Roll No:  {{ user.rollno }}
+        <ion-icon item-right name="ios-arrow-forward-outline"></ion-icon>
       </ion-item>
       <ion-item-options side="left">
         <button ion-button color="danger" (click)="deleteUser(user)">

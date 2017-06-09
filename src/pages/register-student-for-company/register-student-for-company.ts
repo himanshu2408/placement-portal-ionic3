@@ -39,10 +39,7 @@ export class RegisterStudentForCompanyPage {
     this.companiesService.registerStudent(this.company, this.newStudent).subscribe(response => {
       console.log(response);
       this.loading.dismiss();
-      this.navCtrl.pop();
-      this.navCtrl.pop();
-      this.navCtrl.pop();
-      this.navCtrl.pop();
+      this.navCtrl.popToRoot();
       this.presentAlert('Nice Job!', 'New Student has been added successfully.');
     })
   }
