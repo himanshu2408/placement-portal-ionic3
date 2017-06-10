@@ -1,23 +1,70 @@
 <ion-header>
 
-  <ion-navbar color="secondary">
+  <ion-navbar color="primary">
     <ion-title>Welcome</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-<ion-content>
+<ion-content class="bg-color card-background-page" fullscreen>
   <br>
-  <button ion-button full color="secondary" outline (click)="manageStudents()">
+  <!--
+  <ion-card (click)="manageStudents()">
+    <img src="../../assets/img/card-students.jpg"/>
+    <div class="card-title">Manage Students</div>
+  </ion-card>
+  <ion-card (click)="manageCompanies()">
+    <img src="../../assets/img/card-companies.jpg"/>
+    <div class="card-title">Manage Companies</div>
+  </ion-card> -->
+  <!--
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button full color="primary" outline (click)="manageStudents()">
+          <ion-icon name="people" padding-right="5px"></ion-icon>
+          Manage Students
+        </button>
+        <ion-card-content text-center>
+            <ion-item>
+              <ion-icon name="people"></ion-icon>
+              Manage Students
+            </ion-item>
+
+          </ion-card-content>
+
+        <ion-card (click)="manageStudents()">
+          <img src="img/card-amsterdam.png"/>
+          <div class="card-title">Manage Students</div>
+          <div class="card-subtitle">64 Listings</div>
+        </ion-card>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button full color="primary" outline (click)="manageCompanies()">
+          <ion-icon name="trending-up" padding-right="5px"></ion-icon>
+          Manage Companies
+        </button>
+      </ion-col>
+    </ion-row>
+    <br>
+    <ion-row>
+      <ion-col col-12>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+-->
+  <br>
+  <button ion-button full color="primary" outline (click)="manageStudents()">
     <ion-icon name="people" padding-right="5px"></ion-icon>
     Manage Students
   </button>
-  <button ion-button full color="secondary" outline (click)="manageCompanies()">
+  <button ion-button full color="primary" outline (click)="manageCompanies()">
     <ion-icon name="trending-up" padding-right="5px"></ion-icon>
     Manage Companies
   </button>
   <br>
-  <button ion-button full color="secondary" outline (click)="logout()">
+  <button ion-button full color="primary" outline (click)="logout()">
     Logout
   </button>
 </ion-content>
