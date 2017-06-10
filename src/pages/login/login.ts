@@ -6,6 +6,7 @@ import { LoadingController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { SignupPage } from '../signup/signup';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -14,10 +15,7 @@ import { SignupPage } from '../signup/signup';
 })
 export class LoginPage {
 
-  private user = {
-    username: '',
-    password: ''
-  }
+  public loginForm : FormGroup;
   private loading: any;
 
   constructor(
@@ -27,8 +25,13 @@ export class LoginPage {
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     public events: Events,
-    private storage: Storage
+    private storage: Storage,
+    public formBuilder: FormBuilder
   ) {
+    this.loginForm = formBuilder.group({
+      username: ['', Validators.compose([Validators.required])],
+      password: ['', Validators.compose([Validators.required])]
+    });
   }
 
   ionViewDidLoad() {
@@ -44,8 +47,13 @@ export class LoginPage {
   }
 
   login(){
+    let user = {
+        username: this.loginForm.value.username,
+        password: this.loginForm.value.password
+      };
+    console.log(user);
     this.presentLoadingDefault();
-    this.authService.login(this.user).subscribe(response => {
+    this.authService.login(user).subscribe(response => {
         this.loading.dismiss();
         //console.log(response);
         if(response.status === 200){
