@@ -8,5 +8,26 @@
 
 
 <ion-content padding>
+  <ion-list>
 
+    <ion-item>
+      <ion-label floating>Username</ion-label>
+      <ion-input type="text" [(ngModel)]="newUser.username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input type="password" [(ngModel)]="newUser.password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Repeat Password</ion-label>
+      <ion-input type="password" [(ngModel)]="newUser.password2"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <button ion-button full color="primary" outline (click)="signup()">
+    Sign Up
+  </button>
 </ion-content>

@@ -7,6 +7,7 @@ import { StaticService } from './static.service';
 export class AuthService{
 
   private loginUrl = this.staticService.getUrl()+'api/login';
+  private signupUrl = this.staticService.getUrl()+'api/register';
   private logoutUrl = this.staticService.getUrl()+'api/logout';
   private headers = new Headers({'Content-Type': 'application/json'});
 
@@ -28,8 +29,10 @@ export class AuthService{
       .map(response =>response);
   }
 
-  signup(){
-
+  signup(newUser): Observable<any>{
+    return this.http
+      .post(this.signupUrl, newUser, {headers: this.headers})
+      .map(response => response);
   }
 
 }

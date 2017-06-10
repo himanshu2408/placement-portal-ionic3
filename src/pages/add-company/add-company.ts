@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CompaniesService } from '../../app/services/companies.service';
-import { AlertController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 
 @IonicPage()
@@ -23,7 +23,7 @@ export class AddCompanyPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private companiesService: CompaniesService,
-    private alertCtrl: AlertController,
+    private toastCtrl: ToastController,
     private loadingCtrl: LoadingController
   ) {
   }
@@ -38,17 +38,16 @@ export class AddCompanyPage {
       console.log(response);
       this.loading.dismiss();
       this.navCtrl.pop
-      this.presentAlert('Nice ob!', 'New Company has been added successfully.');
+      this.presentToast("New Company has been successfully added.");
     });
   }
 
-  presentAlert(title, subTitle) {
-    let alert = this.alertCtrl.create({
-      title: title,
-      subTitle: subTitle,
-      buttons: ['Dismiss']
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
     });
-    alert.present();
+    toast.present();
   }
 
   presentLoadingDefault() {

@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AuthService } from '../../app/services/auth.service';
+import { LoadingController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
-/**
- * Generated class for the SignupPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-signup',
@@ -14,11 +11,50 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SignupPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  private newUser = {
+    username: '',
+    password: '',
+    password2: ''
+  }
+  private loading: any;
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private authService: AuthService,
+    private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController
+  ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignupPage');
+  }
+
+  signup(){
+    this.presentLoadingDefault();
+    this.authService.signup(this.newUser).subscribe(response => {
+      this.loading.dismiss();
+      console.log(response);
+      this.navCtrl.pop();
+      this.presentToast("Successfully Registered.");
+    });
+  }
+
+  presentLoadingDefault() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Signing Up...'
+    });
+
+    this.loading.present();
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
+    });
+    toast.present();
   }
 
 }

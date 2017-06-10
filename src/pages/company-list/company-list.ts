@@ -4,7 +4,7 @@ import {CompaniesService} from '../../app/services/companies.service';
 import { EditCompanyPage } from '../edit-company/edit-company';
 import { LoadingController } from 'ionic-angular';
 import { AddCompanyPage } from '../add-company/add-company';
-import { AlertController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -21,7 +21,7 @@ export class CompanyListPage {
     public navParams: NavParams,
     private companiesService: CompaniesService,
     private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController
+    private toastCtrl: ToastController
   ) {
     this.presentLoadingDefault();
   }
@@ -55,18 +55,17 @@ export class CompanyListPage {
     this.companiesService.deleteCompany(company).subscribe(response => {
       console.log(response);
       this.loading.dismiss();
-      this.presentAlert('Nice Job!', 'Company has been successfully deleted.');
+      this.presentToast('Company has been successfully deleted.');
       this.navCtrl.popToRoot();
     });
   }
 
-  presentAlert(title, subTitle) {
-    let alert = this.alertCtrl.create({
-      title: title,
-      subTitle: subTitle,
-      buttons: ['Dismiss']
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
     });
-    alert.present();
+    toast.present();
   }
 
 }

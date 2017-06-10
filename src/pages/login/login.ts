@@ -5,6 +5,7 @@ import { Events } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { SignupPage } from '../signup/signup';
 
 @IonicPage()
 @Component({
@@ -58,6 +59,10 @@ export class LoginPage {
           this.presentAlert("Authentication failed.", "Please try again.");
         }
     });
+  }
+
+  signup(){
+    this.navCtrl.push(SignupPage);
   }
 
   presentAlert(title, subTitle) {

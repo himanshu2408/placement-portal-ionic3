@@ -3,10 +3,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserListPage } from '../user-list/user-list';
 import { CompanyListPage } from '../company-list/company-list';
 import { LoadingController } from 'ionic-angular';
-import { AlertController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 import { AuthService } from '../../app/services/auth.service';
 import { Storage } from '@ionic/storage';
 import { Events } from 'ionic-angular';
+
 
 @IonicPage()
 @Component({
@@ -22,7 +23,7 @@ export class MainPage {
     public navParams: NavParams,
     private authService: AuthService,
     private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController,
+    private toastCtrl: ToastController,
     private storage: Storage,
     public events: Events
   ) {
@@ -46,11 +47,11 @@ export class MainPage {
       this.loading.dismiss();
       if(response.status === 200) {
         this.storage.set('isAuthenticated', 'false');
-        this.presentAlert("Adios!!!", "Successfully Logged out");
+        this.presentToast("Successfully Logged out. Adios!!");
         this.events.publish('user:logout');
       }
       else{
-        this.presentAlert("Sorry!!!", "Something went wrong, please try again...");
+        this.presentToast("Something went wrong, please try again...");
       }
     });
   }
@@ -63,12 +64,11 @@ export class MainPage {
     this.loading.present();
   }
 
-  presentAlert(title, subTitle) {
-    let alert = this.alertCtrl.create({
-      title: title,
-      subTitle: subTitle,
-      buttons: ['Dismiss']
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
     });
-    alert.present();
+    toast.present();
   }
 }
