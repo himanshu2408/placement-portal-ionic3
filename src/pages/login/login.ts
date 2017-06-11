@@ -51,18 +51,16 @@ export class LoginPage {
         username: this.loginForm.value.username,
         password: this.loginForm.value.password
       };
-    console.log(user);
     this.presentLoadingDefault();
     this.authService.login(user).subscribe(response => {
         this.loading.dismiss();
         //console.log(response);
         if(response.status === 200){
-          console.log(response.status);
           this.storage.set('isAuthenticated', 'true');
           this.events.publish('user:login');
         }
         else {
-          console.log(response.status);
+          console.log(response);
           console.log("errorrrr");
           this.presentAlert("Authentication failed.", "Please try again.");
         }
