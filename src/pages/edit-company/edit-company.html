@@ -9,30 +9,47 @@
 
 <ion-content>
   <ion-card>
-    <ion-list>
-      <ion-item>
-        <ion-label fixed>Name:</ion-label>
-        <ion-input type="text" value="{{company.name}}" [(ngModel)]="company.name" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label fixed>Profile: </ion-label>
-        <ion-input type="text" value="{{company.profile}}" [(ngModel)]="company.profile" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label fixed>CTC:</ion-label>
-        <ion-input type="text" value="{{company.ctc}}" [(ngModel)]="company.ctc" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label fixed>Address: </ion-label>
-        <ion-input type="text" value="{{company.address}}" [(ngModel)]="company.address" required></ion-input>
-      </ion-item>
-      <ion-item (click)="showRegisteredStudents(company)">
-        Registered Students
-        <ion-icon item-right name="ios-arrow-forward-outline"></ion-icon>
-      </ion-item>
-    </ion-list>
+    <form [formGroup]="editCompanyForm" (ngSubmit)="save()">
+      <ion-list>
+        <ion-item>
+          <ion-label fixed>Name:</ion-label>
+          <ion-input type="text" formControlName="name"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!editCompanyForm.controls.name.valid  && editCompanyForm.controls.name.dirty">
+          <p>Name is required.</p>
+        </ion-item>
+
+        <ion-item>
+          <ion-label fixed>Profile: </ion-label>
+          <ion-input type="text" formControlName="profile"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!editCompanyForm.controls.profile.valid  && editCompanyForm.controls.profile.dirty">
+          <p>Profile is required.</p>
+        </ion-item>
+
+        <ion-item>
+          <ion-label fixed>CTC:</ion-label>
+          <ion-input type="text" formControlName="ctc"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!editCompanyForm.controls.ctc.valid  && editCompanyForm.controls.ctc.dirty">
+          <p>CTC is required.</p>
+        </ion-item>
+
+        <ion-item>
+          <ion-label fixed>Address: </ion-label>
+          <ion-input type="text" formControlName="address"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!editCompanyForm.controls.address.valid  && editCompanyForm.controls.address.dirty">
+          <p>Address is required.</p>
+        </ion-item>
+      </ion-list>
+    </form>
   </ion-card>
-  <button ion-button full color="primary" outline (click)="save()">
+  <ion-item (click)="showRegisteredStudents(company)">
+    Registered Students
+    <ion-icon item-right name="ios-arrow-forward-outline"></ion-icon>
+  </ion-item>
+  <button ion-button full color="primary" outline [disabled]="!editCompanyForm.valid">
     Save Details
   </button>
 </ion-content>
