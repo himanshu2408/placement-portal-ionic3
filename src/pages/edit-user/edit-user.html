@@ -9,26 +9,43 @@
 
 <ion-content>
   <ion-card>
-    <ion-list>
-      <ion-item>
-        <ion-label fixed>Name</ion-label>
-        <ion-input type="text" value="{{user.name}}" [(ngModel)]="user.name" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label fixed>Branch: </ion-label>
-        <ion-input type="text" value="{{user.department}}" [(ngModel)]="user.department" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label fixed>Roll No:</ion-label>
-        <ion-input type="number" value="{{user.rollno}}" [(ngModel)]="user.rollno" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label fixed>CGPA:</ion-label>
-        <ion-input type="text" value="{{user.cgpa}}" [(ngModel)]="user.cgpa" required></ion-input>
-      </ion-item>
-    </ion-list>
+    <form [formGroup]="editStudentForm" (ngSubmit)="save()">
+      <ion-list>
+        <ion-item>
+          <ion-label fixed>Name</ion-label>
+          <ion-input type="text" formControlName="name"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!editStudentForm.controls.name.valid  && editStudentForm.controls.name.dirty">
+          <p>Name is required.</p>
+        </ion-item>
+
+        <ion-item>
+          <ion-label fixed>Branch: </ion-label>
+          <ion-input type="text" formControlName="department"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!editStudentForm.controls.department.valid  && editStudentForm.controls.department.dirty">
+          <p>Department is required.</p>
+        </ion-item>
+
+        <ion-item>
+          <ion-label fixed>Roll No:</ion-label>
+          <ion-input type="number" formControlName="rollno"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!editStudentForm.controls.rollno.valid  && editStudentForm.controls.rollno.dirty">
+          <p>Roll No. is required.</p>
+        </ion-item>
+
+        <ion-item>
+          <ion-label fixed>CGPA:</ion-label>
+          <ion-input type="text" formControlName="cgpa"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!editStudentForm.controls.cgpa.valid  && editStudentForm.controls.cgpa.dirty">
+          <p>CGPA is required.</p>
+        </ion-item>
+      </ion-list>
+    </form>
   </ion-card>
-  <button ion-button full color="primary" outline (click)="save()">
+  <button ion-button full color="primary" outline [disabled]="!editStudentForm.valid">
     Save Details
   </button>
 </ion-content>

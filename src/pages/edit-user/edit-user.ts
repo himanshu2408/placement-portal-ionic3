@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UsersService } from '../../app/services/users.service';
 import { AlertController } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -11,14 +12,21 @@ import { AlertController } from 'ionic-angular';
 export class EditUserPage {
 
   private user: any;
-
+  public editStudentForm : FormGroup;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private usersService: UsersService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    public formBuilder: FormBuilder
   ) {
     this.user = navParams.get('user');
+    this.editStudentForm = formBuilder.group({
+      name: [this.user.name, Validators.compose([Validators.required])],
+      department: [this.user.department, Validators.compose([Validators.required])],
+      rollno: [this.user.rollno, Validators.compose([Validators.required])],
+      cgpa: [this.user.cgpa, Validators.compose([Validators.required])]
+    });
   }
 
   ionViewDidLoad() {
@@ -26,6 +34,11 @@ export class EditUserPage {
   }
 
   save() {
+    this.user.name = this.editStudentForm.value.name;
+    this.user.department = this.editStudentForm.value.department;
+    this.user.rollno = this.editStudentForm.value.rollno;
+    this.user.cgpa = this.editStudentForm.value.cgpa;
+
     this.usersService.update(this.user)
       .subscribe(response => {
         this.presentAlert();
