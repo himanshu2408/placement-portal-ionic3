@@ -35,13 +35,13 @@ export class AddUserPage {
   }
 
   saveUser(){
+    this.presentLoadingDefault();
     let newUser = {
         name : this.addUserForm.value.name,
         department: this.addUserForm.value.department,
         rollno: this.addUserForm.value.rollno,
         cgpa: this.addUserForm.value.cgpa
       };
-    this.presentLoadingDefault();
     this.usersService.addUser(newUser).subscribe(response => {
       console.log(response);
       this.loading.dismiss();

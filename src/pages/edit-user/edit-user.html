@@ -8,8 +8,8 @@
 
 
 <ion-content>
-  <ion-card>
-    <form [formGroup]="editStudentForm">
+  <form [formGroup]="editStudentForm" (ngSubmit)="save()">
+    <ion-card>
       <ion-list>
         <ion-item>
           <ion-label fixed>Name</ion-label>
@@ -43,9 +43,10 @@
           <p>CGPA is required.</p>
         </ion-item>
       </ion-list>
-    </form>
-  </ion-card>
-  <button ion-button full color="primary" outline (onclick)="save()" [disabled]="!editStudentForm.valid">
-    Save Details
-  </button>
+    </ion-card>
+
+    <button ion-button full color="primary" outline [disabled]="!editStudentForm.valid">
+      Save Details
+    </button>
+  </form>
 </ion-content>

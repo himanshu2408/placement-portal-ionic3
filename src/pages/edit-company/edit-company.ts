@@ -69,7 +69,6 @@ export class EditCompanyPage {
   }
 
   showRegisteredStudents(company){
-    console.log(company);
     this.navCtrl.push(RegisteredStudentsPage, {
       company: company
     });

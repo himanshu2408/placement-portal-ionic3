@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UsersService } from '../../app/services/users.service';
-import { AlertController } from 'ionic-angular';
+import { ToastController, LoadingController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @IonicPage()
@@ -13,11 +13,14 @@ export class EditUserPage {
 
   private user: any;
   public editStudentForm : FormGroup;
+  private loading: any;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private usersService: UsersService,
-    private alertCtrl: AlertController,
+    private toastCtrl: ToastController,
+    private loadingCtrl: LoadingController,
     public formBuilder: FormBuilder
   ) {
     this.user = navParams.get('user');
@@ -34,24 +37,33 @@ export class EditUserPage {
   }
 
   save() {
+    this.presentLoadingDefault();
     this.user.name = this.editStudentForm.value.name;
     this.user.department = this.editStudentForm.value.department;
     this.user.rollno = this.editStudentForm.value.rollno;
     this.user.cgpa = this.editStudentForm.value.cgpa;
 
-    this.usersService.update(this.user)
-      .subscribe(response => {
-        this.presentAlert();
+    this.usersService.update(this.user).subscribe(response => {
+      this.loading.dismiss();
+      this.presentToast("Student Details have been successfully updated.");
         this.navCtrl.pop();
       });
   }
-  presentAlert() {
-    let alert = this.alertCtrl.create({
-      title: 'Nice Job!',
-      subTitle: 'User Details have been updated successfully.',
-      buttons: ['Dismiss']
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
     });
-    alert.present();
+    toast.present();
+  }
+
+  presentLoadingDefault() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Please Wait...'
+    });
+
+    this.loading.present();
   }
 
 }

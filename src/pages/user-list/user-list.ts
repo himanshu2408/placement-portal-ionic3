@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UsersService } from '../../app/services/users.service';
 import { EditUserPage } from '../edit-user/edit-user';
-import { LoadingController } from 'ionic-angular';
+import { ToastController, LoadingController } from 'ionic-angular';
 import { AddUserPage } from '../add-user/add-user';
-import { AlertController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -21,7 +20,7 @@ export class UserListPage {
     public navParams: NavParams,
     private usersService: UsersService,
     private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController
+    private toastCtrl: ToastController
   ) {
     this.presentLoadingDefault();
   }
@@ -54,16 +53,15 @@ export class UserListPage {
     this.usersService.deleteUser(user).subscribe(response => {
       console.log(response);
       this.loading.dismiss();
-      this.presentAlert('Nice Job!', 'User has been successfully deleted.');
+      this.presentToast('Student record has been successfully deleted.');
     });
   }
 
-  presentAlert(title, subTitle) {
-    let alert = this.alertCtrl.create({
-      title: title,
-      subTitle: subTitle,
-      buttons: ['Dismiss']
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
     });
-    alert.present();
+    toast.present();
   }
 }
