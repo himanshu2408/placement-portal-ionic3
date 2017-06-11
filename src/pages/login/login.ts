@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthService} from '../../app/services/auth.service';
 import { Events } from 'ionic-angular';
-import { LoadingController } from 'ionic-angular';
-import { AlertController } from 'ionic-angular';
+import { ToastController, LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { SignupPage } from '../signup/signup';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -23,7 +22,7 @@ export class LoginPage {
     public navParams: NavParams,
     private authService: AuthService,
     private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController,
+    private toastCtrl: ToastController,
     public events: Events,
     private storage: Storage,
     public formBuilder: FormBuilder
@@ -54,15 +53,15 @@ export class LoginPage {
     this.presentLoadingDefault();
     this.authService.login(user).subscribe(response => {
         this.loading.dismiss();
-        //console.log(response);
         if(response.status === 200){
           this.storage.set('isAuthenticated', 'true');
           this.events.publish('user:login');
+          this.presentToast("Holla Amigos!!! :D");
         }
         else {
           console.log(response);
           console.log("errorrrr");
-          this.presentAlert("Authentication failed.", "Please try again.");
+          this.presentToast("Authentication failed. Please try again.");
         }
     });
   }
@@ -71,13 +70,12 @@ export class LoginPage {
     this.navCtrl.push(SignupPage);
   }
 
-  presentAlert(title, subTitle) {
-    let alert = this.alertCtrl.create({
-      title: title,
-      subTitle: subTitle,
-      buttons: ['Dismiss']
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
     });
-    alert.present();
+    toast.present();
   }
 
 }

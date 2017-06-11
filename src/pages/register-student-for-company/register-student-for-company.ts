@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CompaniesService } from '../../app/services/companies.service';
-import { AlertController } from 'ionic-angular';
-import { LoadingController } from 'ionic-angular';
+import { ToastController, LoadingController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @IonicPage()
@@ -20,7 +19,7 @@ export class RegisterStudentForCompanyPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private companiesService: CompaniesService,
-    private alertCtrl: AlertController,
+    private toastCtrl: ToastController,
     private loadingCtrl: LoadingController,
     public formBuilder: FormBuilder
   ) {
@@ -38,28 +37,27 @@ export class RegisterStudentForCompanyPage {
   }
 
   saveStudent(){
+    this.presentLoadingDefault();
     let newStudent = {
         name: this.registerStudentForm.value.name,
         department: this.registerStudentForm.value.department,
         rollno: this.registerStudentForm.value.rollno,
         cgpa: this.registerStudentForm.value.cgpa
       };
-    this.presentLoadingDefault();
     this.companiesService.registerStudent(this.company, newStudent).subscribe(response => {
       console.log(response);
       this.loading.dismiss();
       this.navCtrl.popToRoot();
-      this.presentAlert('Nice Job!', 'New Student has been added successfully.');
+      this.presentToast('New Student record has been successfully added.');
     })
   }
 
-  presentAlert(title, subTitle) {
-    let alert = this.alertCtrl.create({
-      title: title,
-      subTitle: subTitle,
-      buttons: ['Dismiss']
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
     });
-    alert.present();
+    toast.present();
   }
 
   presentLoadingDefault() {
