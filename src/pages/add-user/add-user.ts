@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UsersService } from '../../app/services/users.service';
 import { ToastController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -11,21 +12,22 @@ import { LoadingController } from 'ionic-angular';
 })
 export class AddUserPage {
 
-  private newUser = {
-    name : '',
-    department: '',
-    rollno: '',
-    cgpa: ''
-  };
-
+  public addUserForm : FormGroup;
   private loading: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private usersService: UsersService,
     private toastCtrl: ToastController,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    public formBuilder: FormBuilder
   ) {
+    this.addUserForm = formBuilder.group({
+      name: ['', Validators.compose([Validators.required])],
+      department: ['', Validators.compose([Validators.required])],
+      rollno: ['', Validators.compose([Validators.required])],
+      cgpa: ['', Validators.compose([Validators.required])]
+    });
   }
 
   ionViewDidLoad() {
@@ -33,8 +35,14 @@ export class AddUserPage {
   }
 
   saveUser(){
+    let newUser = {
+        name : this.addUserForm.value.name,
+        department: this.addUserForm.value.department,
+        rollno: this.addUserForm.value.rollno,
+        cgpa: this.addUserForm.value.cgpa
+      };
     this.presentLoadingDefault();
-    this.usersService.addUser(this.newUser).subscribe(response => {
+    this.usersService.addUser(newUser).subscribe(response => {
       console.log(response);
       this.loading.dismiss();
       this.navCtrl.pop();
