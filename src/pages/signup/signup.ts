@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthService } from '../../app/services/auth.service';
-import { LoadingController } from 'ionic-angular';
-import { ToastController } from 'ionic-angular';
+import { ToastController, LoadingController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @IonicPage()
@@ -39,12 +38,12 @@ export class SignupPage {
       this.presentToast("Passwords do not match!!!");
     }
     else{
+      this.presentLoadingDefault();
       let newUser = {
         username: this.signupForm.value.username,
         password: this.signupForm.value.password,
         password2: this.signupForm.value.password2
       };
-      this.presentLoadingDefault();
       this.authService.signup(newUser).subscribe(response => {
         this.loading.dismiss();
         console.log(response);

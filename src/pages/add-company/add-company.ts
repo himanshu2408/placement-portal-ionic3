@@ -35,15 +35,14 @@ export class AddCompanyPage {
   }
 
   saveCompany(){
+    this.presentLoadingDefault();
     let newCompany = {
         name : this.addCompanyForm.value.name,
         profile: this.addCompanyForm.value.profile,
         ctc: this.addCompanyForm.value.ctc,
         address: this.addCompanyForm.value.address
       };
-    this.presentLoadingDefault();
     this.companiesService.addCompany(newCompany).subscribe(response => {
-      console.log(response);
       this.loading.dismiss();
       this.navCtrl.pop
       this.presentToast("New Company has been successfully added.");

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CompaniesService } from '../../app/services/companies.service';
-import { AlertController } from 'ionic-angular';
+import { ToastController, LoadingController } from 'ionic-angular';
 import { RegisteredStudentsPage } from '../registered-students/registered-students';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @IonicPage()
 @Component({
@@ -14,11 +15,14 @@ export class EditCompanyPage {
 
   private company: any;
   public editCompanyForm: FormGroup;
+  private loading: any;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private companiesService: CompaniesService,
-    private alertCtrl: AlertController,
+    private toastCtrl: ToastController,
+    private loadingCtrl: LoadingController,
     public formBuilder: FormBuilder
   ) {
     this.company = navParams.get('company');
@@ -35,24 +39,33 @@ export class EditCompanyPage {
   }
 
   save() {
+    this.presentLoadingDefault();
     this.company.name = this.editCompanyForm.value.name;
-    this.company.profie = this.editCompanyForm.value.profile;
+    this.company.profile = this.editCompanyForm.value.profile;
     this.company.ctc = this.editCompanyForm.value.ctc;
     this.company.address = this.editCompanyForm.value.address;
 
-    this.companiesService.update(this.company)
-      .subscribe(response => {
-        this.presentAlert();
+    this.companiesService.update(this.company).subscribe(response => {
+        this.loading.dismiss();
+        this.presentToast("Company Details have been successfully updated.");
         this.navCtrl.pop();
       });
   }
-  presentAlert() {
-    let alert = this.alertCtrl.create({
-      title: 'Nice Job!',
-      subTitle: 'Company Details have been updated successfully.',
-      buttons: ['Dismiss']
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
     });
-    alert.present();
+    toast.present();
+  }
+
+  presentLoadingDefault() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Please Wait...'
+    });
+
+    this.loading.present();
   }
 
   showRegisteredStudents(company){

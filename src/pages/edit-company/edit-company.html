@@ -8,8 +8,8 @@
 
 
 <ion-content>
-  <ion-card>
-    <form [formGroup]="editCompanyForm">
+  <form [formGroup]="editCompanyForm" (ngSubmit)="save()">
+    <ion-card>
       <ion-list>
         <ion-item>
           <ion-label fixed>Name:</ion-label>
@@ -43,13 +43,13 @@
           <p>Address is required.</p>
         </ion-item>
       </ion-list>
-    </form>
-  </ion-card>
-  <ion-item (click)="showRegisteredStudents(company)">
-    Registered Students
-    <ion-icon item-right name="ios-arrow-forward-outline"></ion-icon>
-  </ion-item>
-  <button ion-button full color="primary" outline (onclick)="save()" [disabled]="!editCompanyForm.valid">
-    Save Details
-  </button>
+    </ion-card>
+    <ion-item (click)="showRegisteredStudents(company)">
+      Registered Students
+      <ion-icon item-right name="ios-arrow-forward-outline"></ion-icon>
+    </ion-item>
+    <button ion-button full color="primary" outline [disabled]="!editCompanyForm.valid">
+      Save Details
+    </button>
+  </form>
 </ion-content>
