@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-card>
-    <form [formGroup]="editStudentForm" (ngSubmit)="save()">
+    <form [formGroup]="editStudentForm">
       <ion-list>
         <ion-item>
           <ion-label fixed>Name</ion-label>
@@ -45,7 +45,7 @@
       </ion-list>
     </form>
   </ion-card>
-  <button ion-button full color="primary" outline [disabled]="!editStudentForm.valid">
+  <button ion-button full color="primary" outline (onclick)="save()" [disabled]="!editStudentForm.valid">
     Save Details
   </button>
 </ion-content>

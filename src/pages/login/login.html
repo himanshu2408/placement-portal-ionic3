@@ -9,28 +9,26 @@
 
 <ion-content padding>
   <form [formGroup]="loginForm" (ngSubmit)="login()">
-  <ion-list>
-    <ion-item>
-      <ion-label floating>Username</ion-label>
-      <ion-input type="text" formControlName="username"></ion-input>
-    </ion-item>
-    <ion-item *ngIf="!loginForm.controls.username.valid  && (loginForm.controls.username.dirty)">
-      <p>Username is required.</p>
-    </ion-item>
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Username</ion-label>
+        <ion-input type="text" formControlName="username"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!loginForm.controls.username.valid  && (loginForm.controls.username.dirty)">
+        <p>Username is required.</p>
+      </ion-item>
 
-    <ion-item>
-      <ion-label floating>Password</ion-label>
-      <ion-input type="password"  formControlName="password"></ion-input>
-    </ion-item>
-    <ion-item *ngIf="!loginForm.controls.password.valid  && (loginForm.controls.password.dirty)">
-      <p>Password is required.</p>
-    </ion-item>
-
-  </ion-list>
-
-  <button ion-button full color="primary" outline type="submit" [disabled]="!loginForm.valid">
-    Log In
-  </button>
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password"  formControlName="password"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!loginForm.controls.password.valid  && (loginForm.controls.password.dirty)">
+        <p>Password is required.</p>
+      </ion-item>
+    </ion-list>
+    <button ion-button full color="primary" outline type="submit" [disabled]="!loginForm.valid">
+      Log In
+    </button>
   </form>
   <p text-center>Don't have an account?</p>
   <button ion-button full color="primary" outline (click)="signup()">

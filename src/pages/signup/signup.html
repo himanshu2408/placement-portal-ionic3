@@ -8,26 +8,34 @@
 
 
 <ion-content padding>
-  <ion-list>
+  <form [formGroup]="signupForm" (ngSubmit)="signup()">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Username</ion-label>
+        <ion-input type="text" formControlName="username"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!signupForm.controls.username.valid  && signupForm.controls.username.dirty">
+        <p>Username is required.</p>
+      </ion-item>
 
-    <ion-item>
-      <ion-label floating>Username</ion-label>
-      <ion-input type="text" [(ngModel)]="newUser.username"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!signupForm.controls.password.valid  && signupForm.controls.password.dirty">
+        <p>Password is required and should be 6 to 20 characters long.</p>
+      </ion-item>
 
-    <ion-item>
-      <ion-label floating>Password</ion-label>
-      <ion-input type="password" [(ngModel)]="newUser.password"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label floating>Repeat Password</ion-label>
-      <ion-input type="password" [(ngModel)]="newUser.password2"></ion-input>
-    </ion-item>
-
-  </ion-list>
-
-  <button ion-button full color="primary" outline (click)="signup()">
-    Sign Up
-  </button>
+      <ion-item>
+        <ion-label floating>Repeat Password</ion-label>
+        <ion-input type="password" formControlName="password2"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!signupForm.controls.password2.valid  && signupForm.controls.password2.dirty">
+        <p>Please repeat the password.</p>
+      </ion-item>
+    </ion-list>
+    <button ion-button full color="primary" outline type="submit" [disabled]="!signupForm.valid">
+      Sign Up
+    </button>
+  </form>
 </ion-content>

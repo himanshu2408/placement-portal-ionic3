@@ -8,30 +8,42 @@
 
 
 <ion-content padding>
-  <ion-list>
+  <form [formGroup]="registerStudentForm" (ngSubmit)="saveStudent()">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Name</ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!registerStudentForm.controls.name.valid  && registerStudentForm.controls.name.dirty">
+        <p>Name is required.</p>
+      </ion-item>
 
-    <ion-item>
-      <ion-label floating>Name</ion-label>
-      <ion-input type="text" [(ngModel)]="newStudent.name" required></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label floating>Department</ion-label>
+        <ion-input type="text" formControlName="department"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!registerStudentForm.controls.department.valid  && registerStudentForm.controls.department.dirty">
+        <p>Department is required.</p>
+      </ion-item>
 
-    <ion-item>
-      <ion-label floating>Department</ion-label>
-      <ion-input type="text" [(ngModel)]="newStudent.department" required></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label floating>Roll No</ion-label>
+        <ion-input type="number" formControlName="rollno"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!registerStudentForm.controls.rollno.valid  && registerStudentForm.controls.rollno.dirty">
+        <p>Rollno is required and should be number.</p>
+      </ion-item>
 
-    <ion-item>
-      <ion-label floating>Roll No</ion-label>
-      <ion-input type="number" [(ngModel)]="newStudent.rollno" required></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label floating>CGPA</ion-label>
-      <ion-input type="number" [(ngModel)]="newStudent.cgpa" required></ion-input>
-    </ion-item>
-  </ion-list>
-
-  <button ion-button full color="primary" outline (click)="saveStudent()">
-    Save
-  </button>
+      <ion-item>
+        <ion-label floating>CGPA</ion-label>
+        <ion-input type="number" formControlName="cgpa"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!registerStudentForm.controls.cgpa.valid  && registerStudentForm.controls.cgpa.dirty">
+        <p>CGPA is required.</p>
+      </ion-item>
+    </ion-list>
+    <button ion-button full color="primary" outline type="submit" [disabled]="!registerStudentForm.valid">
+      Save
+    </button>
+  </form>
 </ion-content>

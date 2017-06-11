@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthService } from '../../app/services/auth.service';
 import { LoadingController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -11,11 +12,7 @@ import { ToastController } from 'ionic-angular';
 })
 export class SignupPage {
 
-  private newUser = {
-    username: '',
-    password: '',
-    password2: ''
-  }
+  public signupForm : FormGroup;
   private loading: any;
 
   constructor(
@@ -23,8 +20,14 @@ export class SignupPage {
     public navParams: NavParams,
     private authService: AuthService,
     private loadingCtrl: LoadingController,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    public formBuilder: FormBuilder
   ) {
+    this.signupForm = formBuilder.group({
+      username: ['', Validators.compose([Validators.required])],
+      password: ['', Validators.compose([Validators.minLength(6), Validators.maxLength(20), Validators.required])],
+      password2: ['', Validators.compose([Validators.required])]
+    });
   }
 
   ionViewDidLoad() {
@@ -32,13 +35,23 @@ export class SignupPage {
   }
 
   signup(){
-    this.presentLoadingDefault();
-    this.authService.signup(this.newUser).subscribe(response => {
-      this.loading.dismiss();
-      console.log(response);
-      this.navCtrl.pop();
-      this.presentToast("Successfully Registered.");
-    });
+    if(this.signupForm.value.password != this.signupForm.value.password2){
+      this.presentToast("Passwords do not match!!!");
+    }
+    else{
+      let newUser = {
+        username: this.signupForm.value.username,
+        password: this.signupForm.value.password,
+        password2: this.signupForm.value.password2
+      };
+      this.presentLoadingDefault();
+      this.authService.signup(newUser).subscribe(response => {
+        this.loading.dismiss();
+        console.log(response);
+        this.navCtrl.pop();
+        this.presentToast("Successfully Registered.");
+      });
+    }
   }
 
   presentLoadingDefault() {
