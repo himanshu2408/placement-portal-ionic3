@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CompaniesService } from '../../app/services/companies.service';
 import { ToastController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -11,21 +12,22 @@ import { LoadingController } from 'ionic-angular';
 })
 export class AddCompanyPage {
 
-  private newCompany = {
-    name : '',
-    profile: '',
-    ctc: '',
-    address: ''
-  };
-
+  public addCompanyForm : FormGroup;
   private loading: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private companiesService: CompaniesService,
     private toastCtrl: ToastController,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    public formBuilder: FormBuilder
   ) {
+    this.addCompanyForm = formBuilder.group({
+      name: ['', Validators.compose([Validators.required])],
+      profile: ['', Validators.compose([Validators.required])],
+      ctc: ['', Validators.compose([Validators.required])],
+      address: ['', Validators.compose([Validators.required])]
+    });
   }
 
   ionViewDidLoad() {
@@ -33,8 +35,14 @@ export class AddCompanyPage {
   }
 
   saveCompany(){
+    let newCompany = {
+        name : this.addCompanyForm.value.name,
+        profile: this.addCompanyForm.value.profile,
+        ctc: this.addCompanyForm.value.ctc,
+        address: this.addCompanyForm.value.address
+      };
     this.presentLoadingDefault();
-    this.companiesService.addCompany(this.newCompany).subscribe(response => {
+    this.companiesService.addCompany(newCompany).subscribe(response => {
       console.log(response);
       this.loading.dismiss();
       this.navCtrl.pop

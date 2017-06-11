@@ -8,30 +8,43 @@
 
 
 <ion-content padding>
-  <ion-list>
+  <form [formGroup]="addCompanyForm" (ngSubmit)="saveCompany()">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Name</ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!addCompanyForm.controls.name.valid  && addCompanyForm.controls.name.dirty">
+        <p>Name is required.</p>
+      </ion-item>
 
-    <ion-item>
-      <ion-label floating>Name</ion-label>
-      <ion-input type="text" [(ngModel)]="newCompany.name" required></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label floating>Profile</ion-label>
+        <ion-input type="text" formControlName="profile"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!addCompanyForm.controls.profile.valid  && addCompanyForm.controls.profile.dirty">
+        <p>Profile is required.</p>
+      </ion-item>
 
-    <ion-item>
-      <ion-label floating>Profile</ion-label>
-      <ion-input type="text" [(ngModel)]="newCompany.profile" required></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label floating>CTC</ion-label>
+        <ion-input type="text" formControlName="ctc"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!addCompanyForm.controls.ctc.valid  && addCompanyForm.controls.ctc.dirty">
+        <p>CTC is required.</p>
+      </ion-item>
 
-    <ion-item>
-      <ion-label floating>CTC</ion-label>
-      <ion-input type="text" [(ngModel)]="newCompany.ctc" required></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label floating>Address</ion-label>
+        <ion-input type="text" formControlName="address"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!addCompanyForm.controls.address.valid  && addCompanyForm.controls.address.dirty">
+        <p>Address is required.</p>
+      </ion-item>
+    </ion-list>
 
-    <ion-item>
-      <ion-label floating>Address</ion-label>
-      <ion-input type="text" [(ngModel)]="newCompany.address" required></ion-input>
-    </ion-item>
-  </ion-list>
-
-  <button ion-button full color="primary" outline (click)="saveCompany()">
-    Save
-  </button>
+    <button ion-button full color="primary" outline type="submit" [disabled]="!addCompanyForm.valid">
+      Save
+    </button>
+  </form>
 </ion-content>
