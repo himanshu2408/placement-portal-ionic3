@@ -44,9 +44,20 @@ export class AddCompanyPage {
       };
     this.companiesService.addCompany(newCompany).subscribe(response => {
       this.loading.dismiss();
-      this.navCtrl.pop
-      this.presentToast("New Company has been successfully added.");
-    });
+        if(response.status === 200){
+          this.navCtrl.pop();
+          this.presentToast("New Company has been successfully added.");
+        }
+        else{
+          this.presentToast("Something went wrong.");
+        }
+    },
+      error => {
+        this.loading.dismiss();
+        this.presentToast("Connection to server failed. Please try again.");
+        console.log(error);
+      }
+    );
   }
 
   presentToast(msg) {

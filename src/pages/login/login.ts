@@ -46,11 +46,11 @@ export class LoginPage {
   }
 
   login(){
+    this.presentLoadingDefault();
     let user = {
         username: this.loginForm.value.username,
         password: this.loginForm.value.password
       };
-    this.presentLoadingDefault();
     this.authService.login(user).subscribe(response => {
         this.loading.dismiss();
         if(response.status === 200){
@@ -58,12 +58,19 @@ export class LoginPage {
           this.events.publish('user:login');
           this.presentToast("Holla Amigos!!! :D");
         }
-        else {
-          console.log(response);
-          console.log("errorrrr");
-          this.presentToast("Authentication failed. Please try again.");
+        else if(response.status === 401){
+          this.presentToast("Username and password do not match.");
         }
-    });
+        else{
+          this.presentToast("Something went wrong.");
+        }
+    },
+      error => {
+        this.loading.dismiss();
+        this.presentToast("Connection to server failed. Please try again.");
+        console.log(error);
+      }
+    );
   }
 
   signup(){

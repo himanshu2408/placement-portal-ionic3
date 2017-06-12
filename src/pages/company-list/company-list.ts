@@ -55,9 +55,20 @@ export class CompanyListPage {
     this.companiesService.deleteCompany(company).subscribe(response => {
       console.log(response);
       this.loading.dismiss();
-      this.presentToast('Company has been successfully deleted.');
-      this.navCtrl.popToRoot();
-    });
+      if(response.status === 200){
+        this.presentToast('Company has been successfully deleted.');
+        this.navCtrl.popToRoot();
+      }
+      else{
+        this.presentToast("Something went wrong.");
+      }
+    },
+      error => {
+        this.loading.dismiss();
+        this.presentToast("Connection to server failed. Please try again.");
+        console.log(error);
+      }
+    );
   }
 
   presentToast(msg) {
