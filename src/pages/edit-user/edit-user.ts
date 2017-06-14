@@ -45,9 +45,20 @@ export class EditUserPage {
 
     this.usersService.update(this.user).subscribe(response => {
       this.loading.dismiss();
-      this.presentToast("Student Details have been successfully updated.");
-        this.navCtrl.pop();
-      });
+        if(response.status === 200){
+          this.presentToast("Student Details have been successfully updated.");
+          this.navCtrl.pop();
+        }
+        else{
+          this.presentToast("Something went wrong.");
+        }
+      },
+      error => {
+        this.loading.dismiss();
+        this.presentToast("Connection to server failed. Please try again.");
+        console.log(error);
+      }
+      );
   }
 
   presentToast(msg) {

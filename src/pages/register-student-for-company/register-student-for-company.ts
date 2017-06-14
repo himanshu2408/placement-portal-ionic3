@@ -47,9 +47,20 @@ export class RegisterStudentForCompanyPage {
     this.companiesService.registerStudent(this.company, newStudent).subscribe(response => {
       console.log(response);
       this.loading.dismiss();
-      this.navCtrl.popToRoot();
-      this.presentToast('New Student record has been successfully added.');
-    })
+        if(response.status === 200) {
+          this.navCtrl.popToRoot();
+          this.presentToast('New Student record has been successfully added.');
+        }
+        else{
+          this.presentToast("Something went wrong, please try again...");
+        }
+    },
+      error => {
+        this.loading.dismiss();
+        this.presentToast("Connection to server failed. Please try again.");
+        console.log(error);
+      }
+    );
   }
 
   presentToast(msg) {

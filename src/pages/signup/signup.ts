@@ -46,10 +46,20 @@ export class SignupPage {
       };
       this.authService.signup(newUser).subscribe(response => {
         this.loading.dismiss();
-        console.log(response);
-        this.navCtrl.pop();
-        this.presentToast("Successfully Registered.");
-      });
+        if(response.status === 200) {
+          this.navCtrl.pop();
+          this.presentToast("Registration Successful.");
+        }
+        else{
+          this.presentToast("Something went wrong, please try again...");
+        }
+      },
+        error => {
+        this.loading.dismiss();
+        this.presentToast("Connection to server failed. Please try again.");
+        console.log(error);
+      }
+      );
     }
   }
 

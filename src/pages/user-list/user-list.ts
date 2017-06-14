@@ -53,8 +53,19 @@ export class UserListPage {
     this.usersService.deleteUser(user).subscribe(response => {
       console.log(response);
       this.loading.dismiss();
-      this.presentToast('Student record has been successfully deleted.');
-    });
+        if(response.status === 200) {
+          this.presentToast('Student record has been successfully deleted.');
+        }
+        else{
+          this.presentToast("Something went wrong, please try again...");
+        }
+    },
+      error => {
+        this.loading.dismiss();
+        this.presentToast("Connection to server failed. Please try again.");
+        console.log(error);
+      }
+    );
   }
 
   presentToast(msg) {

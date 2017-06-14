@@ -47,13 +47,19 @@ export class MainPage {
       this.loading.dismiss();
       if(response.status === 200) {
         this.storage.set('isAuthenticated', 'false');
-        this.presentToast("Successfully Logged out. Adios!!");
+        this.presentToast("Successfully Logged out. Adios!!!");
         this.events.publish('user:logout');
       }
       else{
         this.presentToast("Something went wrong, please try again...");
       }
-    });
+    },
+      error => {
+        this.loading.dismiss();
+        this.presentToast("Connection to server failed. Please try again.");
+        console.log(error);
+      }
+    );
   }
 
   presentLoading(content) {
