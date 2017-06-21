@@ -14,7 +14,6 @@
 
 <ion-content>
     <ion-card *ngFor="let student of company.registeredStudents">
-
         <ion-list>
           <ion-item>
           <h3>
@@ -41,7 +40,11 @@
             <p item-right>{{student.cgpa}}</p>
           </ion-item>
         </ion-list>
-
+      <ion-item>
+        <button ion-button full color="primary" outline (click)="unregisterStudent(student, company)">
+          UNREGISTER THIS STUDENT
+        </button>
+      </ion-item>
     </ion-card>
 
 </ion-content>

@@ -49,4 +49,11 @@ export class CompaniesService{
       .post(this.updateUrl, newSudent ,{headers: this.headers})
       .map(response => response);
   }
+
+  unregisterStudent(student, company): Observable<any>{
+    this.updateUrl = this.baseUrl+"/"+company._id+"/"+student._id;
+    return this.http
+      .delete(this.updateUrl, {headers: this.headers})
+      .map(response => response);
+  }
 }
