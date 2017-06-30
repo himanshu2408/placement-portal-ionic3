@@ -45,8 +45,13 @@ export class AddCompanyPage {
     this.companiesService.addCompany(newCompany).subscribe(response => {
       this.loading.dismiss();
         if(response.status === 200){
-          this.navCtrl.pop();
-          this.presentToast("New Company has been successfully added.");
+          if(response._body == "Company with this name is already registered."){
+            this.presentToast("Company with this name is already registered.");
+          }
+          else{
+            this.navCtrl.pop();
+            this.presentToast("New Company has been successfully added.");
+          }
         }
         else{
           this.presentToast("Something went wrong.");

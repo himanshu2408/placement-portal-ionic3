@@ -46,8 +46,13 @@ export class EditUserPage {
     this.usersService.update(this.user).subscribe(response => {
       this.loading.dismiss();
         if(response.status === 200){
-          this.presentToast("Student Details have been successfully updated.");
-          this.navCtrl.pop();
+          if(response._body == "rollno already registered."){
+            this.presentToast("Rollno already registered.");
+          }
+          else{
+            this.presentToast("Student Details have been successfully updated.");
+            this.navCtrl.pop();
+          }
         }
         else{
           this.presentToast("Something went wrong.");

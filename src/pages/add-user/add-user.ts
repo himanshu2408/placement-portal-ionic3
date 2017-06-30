@@ -45,9 +45,14 @@ export class AddUserPage {
     this.usersService.addUser(newUser).subscribe(response => {
       this.loading.dismiss();
       if(response.status === 200){
-        this.navCtrl.pop();
-        this.navCtrl.pop();
-        this.presentToast("New User has been successfully added.");
+        if(response._body == "rollno already registered."){
+          this.presentToast("Rollno already registered.");
+        }
+        else{
+          this.navCtrl.pop();
+          this.navCtrl.pop();
+          this.presentToast("New User has been successfully added.");
+        }
       }
       else{
         this.presentToast("Something went wrong.");

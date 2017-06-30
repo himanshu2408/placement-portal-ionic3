@@ -48,8 +48,13 @@ export class EditCompanyPage {
     this.companiesService.update(this.company).subscribe(response => {
         this.loading.dismiss();
         if(response.status === 200){
-          this.presentToast("Company Details have been successfully updated.");
-          this.navCtrl.pop();
+          if(response._body == "Company with this name is already registered."){
+            this.presentToast("Company with this name is already registered.");
+          }
+          else{
+            this.presentToast("Company Details have been successfully updated.");
+            this.navCtrl.pop();
+          }
         }
         else{
           this.presentToast("Something went wrong.");
